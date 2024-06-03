@@ -20,5 +20,6 @@ app.listen(Port,()=>{
     
     if (Port == undefined) return;
     
-    console.log(`Listening at localhost:/${Port}`)
-},)
+
+    console.log(`Listening at localhost:/${Port}`);
+},);
