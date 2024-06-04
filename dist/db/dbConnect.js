@@ -9,17 +9,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.updateTask = exports.createTask = exports.getTask = exports.getTasks = void 0;
-const getTasks = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    //const 1
+exports.run = void 0;
+const mongoose_1 = require("mongoose");
+const run = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield (0, mongoose_1.connect)("mongodb+srv://touraxis:LMFY07804316078043@touraxis.fggzinj.mongodb.net/", {
+        dbName: 'TourAxis'
+    })
+        .then(() => {
+        console.log("db connected 🙌🙌🙌");
+    })
+        .catch((err) => {
+        console.log(`failed to connect ! ${err}`);
+    });
 });
-exports.getTasks = getTasks;
-const getTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.getTask = getTask;
-const createTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.createTask = createTask;
-const updateTask = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-});
-exports.updateTask = updateTask;
+exports.run = run;

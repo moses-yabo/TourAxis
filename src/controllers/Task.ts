@@ -1,16 +1,22 @@
-import {RequestHandler}from "express";
+import {RequestHandler} from "express";
+import { Task } from "../model/Task";
 
+export const getTasks:RequestHandler = async(req,res)=>{
+    //const 1
 
-export const getUsers:RequestHandler = (req,res)=>{
+    
+};
+
+export const getTask:RequestHandler = async(req,res)=>{
+    
+
+    
+};
+export const createTask:RequestHandler = async(req,res)=>{
 
 };
-export const createUser:RequestHandler = (req,res)=>{
-
-};
-export const updateUser:RequestHandler = (req,res)=>{
+export const updateTask:RequestHandler =  async(req,res)=>{
 
 }
-export const deleteUsers:RequestHandler = (req,res)=>{
 
-}
 

@@ -1,8 +1,12 @@
 import { Router } from "express";
-
-const router = Router();
-router
+import {createTask,getTask,getTasks,updateTask} from "../controllers/Task";
+export const taskRouter = Router();
+taskRouter
 .route("/")
-.get()
-.post()
-.patch()
+.get(getTasks)
+.post(createTask);
+taskRouter
+.route("/:id")
+.get(getTask)
+.put(updateTask);
+

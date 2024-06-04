@@ -3,26 +3,26 @@ import {IUser} from "../types/IUser";
 const schema:Schema = new Schema<IUser<string>>({
 id:{
     type:Types.ObjectId,
-    required:true
+    
 },
 username:{
     type:String,
     min:3,
     max:25,
-    required:true
+    required:[true,"YOU MUST ENTER A USERNAME !"]
 },
 first_name:{
     type:String,
     min:3,
     max:25,
-    required:true
+    required:[true,"YOU MUST ENTER A FIRSTNAME !"]
 },
 last_name:{
     type:String,
     min:3,
     max:25,
-    required:true
+    required:[true,"YOU MUST ENTER A LASTNAME !"]
 
 }
 });
-export const Users= model("Users",schema);
+export const Users = model<IUser<string>>("Users",schema);
