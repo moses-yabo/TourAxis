@@ -1,43 +1,38 @@
 "use strict";
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
-var _a;
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
+const dotenv_1 = require("dotenv");
 const User_1 = require("./routes/User");
-const Task_1 = require("./routes/Task");
 const dbConnect_1 = require("./db/dbConnect");
+const taskScheduler_1 = require("./scheduler/taskScheduler");
 const app = (0, express_1.default)();
-const Port = (_a = process.env.PORT) !== null && _a !== void 0 ? _a : 3000;
+const port = process.env.PORT || 3000;
 app.use(express_1.default.json());
 app.use(express_1.default.urlencoded({ extended: false }));
-(0, dbConnect_1.run)()
-    .then((v) => {
-})
-    .catch(err => {
-    new Error(err);
-});
+(0, dotenv_1.config)();
+(0, dbConnect_1.run)();
+(0, taskScheduler_1.startScheduler)();
 app.use("/api/users", User_1.userRouter);
-app.use("/api/users/:userId/tasks", Task_1.taskRouter);
-app.get("/", (req, res) => {
-    if (res.statusCode === 200) {
-        res
-            .json({
-            message: "success",
-            status: 200,
-        });
+app.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        res.status(200).json({ message: "success", status: 200 });
     }
-    else {
-        res
-            .status(500)
-            .json({
-            message: "failed 1",
-            status: 500
-        });
+    catch (error) {
+        res.status(500).json({ message: "Internal server ", status: 500 });
     }
-    ;
-});
-app.listen(Port, () => {
-    console.log(`Server is Running at Port ${Port}`);
+}));
+app.listen(port, () => {
+    console.log(`Server is Running at port ${port}`);
 });

@@ -1,11 +1,8 @@
-import { Schema, Types,model } from "mongoose";
+import { Schema, model } from "mongoose";
 import {ITask} from "../types/ITask";
+import {Users} from "../model/User";
 const schema:Schema = new Schema<ITask<string>>({
-id:{
-    type:Types.ObjectId,
-    required:true,
-    unique:true
-},
+userId: { type:Schema.Types.ObjectId , ref: 'Users'},
 name:{
     type:String,
     min:4,
@@ -13,6 +10,7 @@ name:{
     required:true
 
 },
+
 description:{
     type:String,
     min:4,
@@ -27,6 +25,8 @@ date_time:{
 status:{
     type:String,
     default:"pending"
-}
+},
+next_execute_date_time: { type: Date, required: false },
+
 });
 export const Task = model("Tasks",schema);

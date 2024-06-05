@@ -1,48 +1,27 @@
 import express,{Request,Response} from "express";
+import { config } from "dotenv";
 import { userRouter } from "./routes/User";
-import { taskRouter } from "./routes/Task";
 import { run } from "./db/dbConnect";
-
+import { startScheduler } from "./scheduler/taskScheduler";
 const app = express();
-const Port = process.env.PORT ?? 3000;
+const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
-run()
-.then((v)=>{
-
-})
-.catch(err=>{
-    new Error(err);
-})
-;
+config();
+run();
+startScheduler();
 app.use("/api/users",userRouter);
-app.use("/api/users/:userId/tasks",taskRouter);
 
 
-app.get("/",(req:Request,res:Response)=>{
-   
-    if (res.statusCode === 200){
-        res
-        .json({
-            message:"success",
-            status:200,
-            
-        });
-    
-}
-else{
-
-    res
-    .status(500)
-    .json({
-        message:"failed 1",
-        status:500
-    })
-}
-;
+app.get("/", async(req:Request,res:Response)=>{
+    try {
+        res.status(200).json({message:"success",status:200});
+    } catch (error) {
+        res.status(500).json({message:"Internal server ",status:500});
+    }
 });
 
-app.listen(Port,()=>{    
+app.listen(port,()=>{    
 
-    console.log(`Server is Running at Port ${Port}`);
+    console.log(`Server is Running at port ${port}`);
 });

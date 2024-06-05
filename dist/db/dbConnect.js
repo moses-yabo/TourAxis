@@ -12,7 +12,9 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.run = void 0;
 const mongoose_1 = require("mongoose");
 const run = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield (0, mongoose_1.connect)("mongodb+srv://touraxis:LMFY07804316078043@touraxis.fggzinj.mongodb.net/", {
+    const dburi = process.env.DB_CONNECTION_STRING;
+    const dbpassword = process.env.DB_PASSWORD;
+    yield (0, mongoose_1.connect)(dburi.replace("<password>", dbpassword), {
         dbName: 'TourAxis'
     })
         .then(() => {

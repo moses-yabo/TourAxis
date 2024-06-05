@@ -1,12 +1,14 @@
 import { Router } from "express";
-import {createTask,getTask,getTasks,updateTask} from "../controllers/Task";
-export const taskRouter = Router();
+import {createTask,getTask,getTasks,updateTask,deleteTask} from "../controllers/Task";
+export const taskRouter = Router({mergeParams:true});
+
 taskRouter
 .route("/")
 .get(getTasks)
 .post(createTask);
 taskRouter
-.route("/:id")
+.route("/:task_id")
 .get(getTask)
-.put(updateTask);
+.put(updateTask)
+.delete(deleteTask);
 

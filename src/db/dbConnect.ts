@@ -1,7 +1,8 @@
 import { connect } from "mongoose";
  export  const run = async ()=>{
-    
-    await connect("mongodb+srv://touraxis:LMFY07804316078043@touraxis.fggzinj.mongodb.net/",{
+    const dburi = process.env.DB_CONNECTION_STRING ;
+    const dbpassword = process.env.DB_PASSWORD; 
+    await connect((dburi as string).replace("<password>",dbpassword as string),{
         dbName: 'TourAxis'
     })
     .then(()=>{
@@ -9,6 +10,5 @@ import { connect } from "mongoose";
     })
     .catch((err)=>{
     console.log(`failed to connect ! ${err}`);
-    })
-    ;
+    });
 };

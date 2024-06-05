@@ -3,11 +3,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Task = void 0;
 const mongoose_1 = require("mongoose");
 const schema = new mongoose_1.Schema({
-    id: {
-        type: mongoose_1.Types.ObjectId,
-        required: true,
-        unique: true
-    },
+    userId: { type: mongoose_1.Schema.Types.ObjectId, ref: 'Users' },
     name: {
         type: String,
         min: 4,
@@ -27,6 +23,7 @@ const schema = new mongoose_1.Schema({
     status: {
         type: String,
         default: "pending"
-    }
+    },
+    next_execute_date_time: { type: Date, required: false },
 });
 exports.Task = (0, mongoose_1.model)("Tasks", schema);
