@@ -24,7 +24,11 @@ TourAxis is a Node.js RESTful application that manages users and tasks for those
 ```bash
 git clone https://github.com/moses-yabo/TourAxis.git
 ```
+
+```bash
 cd Touraxis
+```
+
 
 2. Install dependencies:
 
@@ -34,14 +38,17 @@ npm install
 ```
 3. Create a .env file in the root directory and add your MongoDB connection string
 
+```bash
 DB_CONNECTION_STRING=mongodb+srv://touraxis:<password>@touraxis.fggzinj.mongodb.net/
 
-4. npm start
+```
+4. Execute Run Application
 ```bash
 npm start
+```
 
 The server will start on http://localhost:3000
-```
+
 
 
 
@@ -67,4 +74,3 @@ The application exposes the following RESTful API endpoints:
 
 The application includes a scheduled job that runs periodically to check for tasks with a `status` of "pending" and a `next_execute_date_time` that has passed. These tasks are printed to the console and their status is updated to "done".
 
-The API is documented using Swagger. You can access the Swagger UI at http://localhost:3000/api-docs.
