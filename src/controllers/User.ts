@@ -3,21 +3,20 @@ import { Users } from './../model/User'
 
 
 export const getUsers:RequestHandler = async (req,res)=>{
-   
-        try {
-    
-            const users = await Users.find({});
-            if(!users || users.length === 0)  return res.status(404).json({
-                message:"users is not found",
-                status:200,
-                users:users
-            });
-            res.status(200).json({message:"success",status:200,users:users});
-            
+            try {
         
-            } catch (err) {
-                res.status(500).json({message:"internal server Error",status:500,error:err});
-            }
+                const users = await Users.find({});
+                if(!users || users.length === 0)  return res.status(404).json({
+                    message:"users is not found",
+                    status:200,
+                     users:users
+                });
+                res.status(200).json({message:"success",status:200,users:users});
+                
+            
+                } catch (err) {
+                    res.status(500).json({message:"internal server Error",status:500,error:err});
+                }
     
    
 };
